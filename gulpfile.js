@@ -51,13 +51,13 @@ gulp.task('fileinclude', function() {
 			prefix: '@@',
 			basepath: '@file'
 		}))
-		.pipe(htmlmin({
-			minifyJS: true, //压缩页面JS
-			minifyCSS: true, //压缩页面css
-			removeComments: true,
-			collapseWhitespace: true,
-			removeScriptTypeAttributes: true
-		}))
+//		.pipe(htmlmin({
+//			minifyJS: true, //压缩页面JS
+//			minifyCSS: true, //压缩页面css
+//			removeComments: true,
+//			collapseWhitespace: true,
+//			removeScriptTypeAttributes: true
+//		}))
 		.pipe(gulp.dest('dist'))
 		.pipe(connect.reload());
 });
