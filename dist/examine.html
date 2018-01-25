@@ -74,104 +74,94 @@
 </div>
 			<!-- 菜单 -->
 			<div class="layui-side layui-bg-black">
-    <div class="layui-side-scroll">
-      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-      	<li class="layui-nav-item"><a href="index.html">控制台</a></li>
-        <li class="layui-nav-item">
-          <a class="" href="javascript:;">统计</a>
-          <dl class="layui-nav-child">
-            <dd><a href="javascript:;">列表一</a></dd>
-            <dd><a href="javascript:;">列表二</a></dd>
-            <dd><a href="javascript:;">列表三</a></dd>
-            <dd><a href="">超链接</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a href="table.html">数据</a>
-        </li>
-        <li class="layui-nav-item">
-        	<a href="javascript:;">设置</a>
-        	<dl class="layui-nav-child">
-            <dd><a href="examine.html">帐号审核(管理员)</a></dd>
-            <dd><a href="javascript:;">权限管理(管理员)</a></dd>
-            <dd><a href="javascript:;">数据同步周期</a></dd>
-          </dl>
-        </li>
-      </ul>
-    </div>
-  </div>
+	<div class="layui-side-scroll">
+		<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+		<ul class="layui-nav layui-nav-tree" lay-filter="test">
+			<li class="layui-nav-item">
+				<a href="index.html">控制台</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">统计数据</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="table.html">表格</a>
+					</dd>
+					<dd>
+						<a href="area-simple.html">大数据面积图</a>
+					</dd>
+					<dd>
+						<a href="grid-multiple.html">关系图</a>
+					</dd>
+					<dd>
+						<a href="line-marker.html">折线图</a>
+					</dd>
+					<dd>
+						<a href="bar.html">柱状图</a>
+					</dd>
+					<dd>
+						<a href="table.html">扇形图</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">帐号审核(管理员)</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="audit.html">待审核</a>
+					</dd>
+					<dd>
+						<a href="examine.html">已审核</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">设置</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="javascript:;">权限管理(管理员)</a>
+					</dd>
+					<dd>
+						<a href="javascript:;">数据同步周期</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+</div>
 
-			<div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+			<div class="layui-body">
 				<!-- 内容主体区域 -->
-				<ul class="layui-tab-title site-demo-title">
-					<li class="layui-this">待审核</li>
-					<li>已审核</li>
-				</ul>
-				<div class="layui-body layui-tab-content site-demo site-demo-body">
-					<div class="layui-tab-item layui-show">
-						<div class="layui-main">
-							<form class="layui-form layui-form-pane" action="">
-								<table class="layui-table">
-									<colgroup>
-										<col width="150">
-										<col width="200">
-										<col>
-									</colgroup>
-									<thead>
-										<tr>
-											<th>昵称</th>
-											<th>加入时间</th>
-											<th>签名</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>贤心</td>
-											<td>2016-11-29</td>
-											<td>人生就像是一场修行</td>
-										</tr>
-										<tr>
-											<td>许闲心</td>
-											<td>2016-11-28</td>
-											<td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-										</tr>
-									</tbody>
-								</table>
-							</form>
-						</div>
-					</div>
-					<div class="layui-tab-item">
-						<div class="layui-main">
-							<form class="layui-form layui-form-pane" action="">
-								<div class="layui-form-item">
-									<div class="layui-inline">
-										<button id="allOpen" class="layui-btn" type="button">
+				<div class="w-container">
+					<fieldset class="layui-elem-field layui-field-title">
+						<legend>已审核</legend>
+					</fieldset>
+					<form class="layui-form layui-form-pane" action="">
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<button id="allOpen" class="layui-btn" type="button">
 											全部开启
 										</button>
-									</div>
-									<div class="layui-inline">
-										<button class="layui-btn layui-btn-danger" type="button">
+							</div>
+							<div class="layui-inline">
+								<button class="layui-btn layui-btn-danger" type="button">
 											全部禁用
 										</button>
-									</div>
-									<div class="layui-inline">
-										<label class="layui-form-label">关键词</label>
-										<div class="layui-input-block">
-											<input type="text" class="layui-input" placeholder="请输入id或姓名" name="keywords" autocomplete="off" />
-										</div>
-									</div>
-									<div class="layui-inline">
-										<button class="layui-btn" lay-submit>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">关键字</label>
+								<div class="layui-input-block">
+									<input type="text" class="layui-input" placeholder="请输入id或姓名" name="keywords" autocomplete="off" />
+								</div>
+							</div>
+							<div class="layui-inline">
+								<button class="layui-btn" lay-submit>
 											<i class="layui-icon">&#xe615;</i>
 											查询
 										</button>
-									</div>
-								</div>
-							</form>
-							<table id="accounts" lay-filter="test"></table>
+							</div>
 						</div>
-					</div>
+					</form>
+					<table id="accounts" lay-filter="test"></table>
 				</div>
 			</div>
 			<!-- 底部版权 -->
@@ -192,6 +182,11 @@
 			<input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="开|关" lay-filter="sexDemo">
 		</script>
 
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">权限</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		</script>
+
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			//JavaScript代码区域
@@ -207,13 +202,10 @@
 					cellMinWidth: 80,
 					cols: [
 						[{
-								type: 'checkbox',
-								fixed: 'left'
-							},
-							{
 								field: 'id',
-								title: 'ID',
-								sort: true
+								title: '用户名',
+								sort: true,
+								fixed: 'left'
 							}, {
 								field: 'name',
 								title: '姓名'
@@ -223,19 +215,19 @@
 								sort: true
 							},
 							{
-								field: 'dateexa',
-								title: '审核日期',
-								sort: true
-							}, {
 								field: 'switch',
 								title: '启用',
 								templet: '#switchTpl',
 								unresize: true
+							},
+							{
+								field: 'operation',
+								title: '操作',
+								templet: '#barDemo'
 							}
 						]
 					]
 				});
-				
 			});
 		</script>
 	</body>
