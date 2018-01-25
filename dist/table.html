@@ -102,48 +102,71 @@
     </div>
   </div>
 
-			<div class="layui-body">
+			<div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
 				<!-- 内容主体区域 -->
-				<div class="w-container">
+				<ul class="layui-tab-title site-demo-title">
+					<li class="layui-this">表格</li>
+					<li>折线图</li>
+					<li>柱状图</li>
+				</ul>
+				<div class="layui-body layui-tab-content site-demo site-demo-body">
+					<div class="layui-tab-item layui-show">
+						<div class="layui-main">
+							<div id="LAY_preview">
 
-					<form class="layui-form layui-form-pane" action="">
-						<div class="layui-form-item">
-							<div class="layui-inline">
-								<button class="layui-btn layui-btn-danger" type="button">
+								<blockquote class="layui-elem-quote layui-text">
+									网点检测数据
+								</blockquote>
+								<form class="layui-form layui-form-pane" action="">
+									<div class="layui-form-item">
+										<div class="layui-inline">
+											<button class="layui-btn layui-btn-danger" type="button">
 									<i class="layui-icon">ဂ</i>
 									刷新
 								</button>
-							</div>
-							<div class="layui-inline">
-								<label class="layui-form-label">数据类型</label>
-								<div class="layui-input-block">
-									<select name="interest" lay-filter="aihao">
-										<option value="">全部</option>
-										<option value="0">温度</option>
-										<option value="1" selected="">湿度</option>
-										<option value="2">风速</option>
-										<option value="3">PM2.5</option>
-										<option value="4">PM10</option>
-									</select>
-								</div>
-							</div>
-							<div class="layui-inline">
-								<label class="layui-form-label">日期</label>
-								<div class="layui-input-block">
-									<input class="layui-input" name="date" placeholder="请选择日期" autocomplete="off" type="text" id="test1">
-								</div>
-							</div>
-							<div class="layui-inline">
-								<button class="layui-btn" lay-submit>
+										</div>
+										<div class="layui-inline">
+											<label class="layui-form-label">地区</label>
+											<div class="layui-input-block">
+												<select name="city" lay-verify="required">
+													<option value=""></option>
+													<option value="0">北京</option>
+													<option value="1">上海</option>
+													<option value="2">广州</option>
+													<option value="3">深圳</option>
+													<option value="4">杭州</option>
+												</select>
+											</div>
+										</div>
+										<div class="layui-inline">
+											<label class="layui-form-label">日期</label>
+											<div class="layui-input-block">
+												<input class="layui-input" name="date" placeholder="请选择日期" autocomplete="off" type="text" id="test1">
+											</div>
+										</div>
+										<div class="layui-inline">
+											<label class="layui-form-label">关键词</label>
+											<div class="layui-input-block">
+												<input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
+											</div>
+										</div>
+										<div class="layui-inline">
+											<button class="layui-btn" lay-submit>
 									<i class="layui-icon">&#xe615;</i>
 									查询
 								</button>
+										</div>
+									</div>
+								</form>
+								<div class="layui-row">
+									<table id="demo" lay-filter="test"></table>
+								</div>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
-				<div class="w-map">
-					<div id="container" style="height: 100%"></div>
+				<div class="w-container">
+
 				</div>
 			</div>
 			<!-- 底部版权 -->
@@ -158,19 +181,63 @@
 </div>
 <div class="site-mobile-shade"></div>
 		</div>
-		
+
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/demo1.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			//JavaScript代码区域
-			layui.use(['form', 'laydate'], function() {
-				var form = layui.form,
-					laydate = layui.laydate;
-				
+			layui.use(['form', 'laydate', 'table'], function() {
+				var table = layui.table,
+					laydate = layui.laydate,
+					form = layui.form;
+
+				table.render({
+					elem: '#demo',
+					height: 440,
+					url: './table.json',
+					page: true,
+					cellMinWidth: 80,
+					cols: [
+						[ //表头
+							{
+								field: 'id',
+								title: 'ID',
+								sort: true,
+								fixed: 'left'
+							}, {
+								field: 'temperature',
+								title: '温度',
+								sort: true
+							}, {
+								field: 'humidity',
+								title: '湿度',
+								sort: true
+							}, {
+								field: 'speed',
+								title: '风速',
+								sort: true
+							}, {
+								field: 'pm2',
+								title: 'PM2.5',
+								sort: true
+							}, {
+								field: 'pm10',
+								title: 'PM10',
+								sort: true
+							}, {
+								field: 'watertemperature',
+								title: '水温',
+								sort: true
+							}
+						]
+					]
+				});
+
 				laydate.render({
 					elem: '#test1', //指定元素
 					range: true
 				});
+
 			});
 		</script>
 	</body>

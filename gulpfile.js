@@ -87,7 +87,7 @@ gulp.task('copy-css', function() {
 });
 
 //拷贝js
-gulp.task('copy-js', function() {
+gulp.task('javascript', function() {
 	return gulp.src('src/js/*.js')
 		.pipe(gulp.dest('dist/js'))
 		.pipe(connect.reload());
@@ -105,16 +105,16 @@ gulp.task("copy-img",function () {
 
 //组合任务
 gulp.task('watch', function() {
-	gulp.watch('src/css/*.scss', ['sass', 'copy-css','copy-js']);
-	gulp.watch('src/css/*.css', ['copy-css','copy-js']);
+	gulp.watch('src/css/*.scss', ['sass', 'copy-css']);
+	gulp.watch('src/css/*.css', ['copy-css']);
 	gulp.watch('src/public/*.html', ['fileinclude']);
-	gulp.watch('src/*.html', ['fileinclude', 'copy-css','copy-js']);
-	gulp.watch('src/*.js', ['fileinclude', 'copy-js']);
+	gulp.watch('src/*.html', ['fileinclude', 'copy-css']);
+	gulp.watch('src/js/*.js', ['javascript']);
 	gulp.watch('src/img/*.*', ['copy-img']);
 
 });
 
-gulp.task('default', ['server', 'watch'], function() {
+gulp.task('default', ['server', 'watch','javascript'], function() {
 	console.log('Gulp任务执行成功,开始撸代码!');
 });
 

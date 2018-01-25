@@ -1,0 +1,11 @@
+@media screen and (max-width: 750px) {
+    .layui-layout-admin {
+        .layui-footer {
+            left: 0;
+            width: auto;
+        }
+        .w-map{
+            top: 60px;
+        }
+    }
+}
