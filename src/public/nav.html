@@ -3,10 +3,34 @@
 		<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 		<ul class="layui-nav layui-nav-tree" lay-filter="test">
 			<li class="layui-nav-item">
-				<a href="index.html">控制台</a>
+				<a href="index.html">实时监控</a>
 			</li>
 			<li class="layui-nav-item">
-				<a href="javascript:;">统计数据</a>
+				<a href="javascript:;">历史数据</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="table.html">表格</a>
+					</dd>
+					<dd>
+						<a href="area-simple.html">大数据面积图</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">污染地图</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="table.html">表格</a>
+					</dd>
+					<dd>
+						<a href="area-simple.html">大数据面积图</a>
+					</dd>
+				</dl>
+			</li>
+			
+			<hr />
+			<li class="layui-nav-item">
+				<a href="javascript:;">(删)统计数据</a>
 				<dl class="layui-nav-child">
 					<dd>
 						<a href="table.html">表格</a>
@@ -40,13 +64,16 @@
 				</dl>
 			</li>
 			<li class="layui-nav-item">
-				<a href="javascript:;">设置</a>
+				<a href="javascript:;">系统设置</a>
 				<dl class="layui-nav-child">
 					<dd>
 						<a href="javascript:;">权限管理(管理员)</a>
 					</dd>
 					<dd>
 						<a href="javascript:;">数据同步周期</a>
+					</dd>
+					<dd>
+						<a href="javascript:;">报警提示设置</a>
 					</dd>
 				</dl>
 			</li>

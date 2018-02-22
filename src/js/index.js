@@ -3,6 +3,8 @@ layui.use(['jquery', 'element', 'layer'], function() {
 		element = layui.element,
 		layer = layui.layer;
 
+	var wSlide = $(".w-slide");
+
 	//	layer.msg('你好5');
 
 	$("#mobileBtn").click(function() {
@@ -17,5 +19,20 @@ layui.use(['jquery', 'element', 'layer'], function() {
 	$("#allOpen").click(function() {
 		layer.confirm('是否全部开启');
 	});
+
+	$(".w-slide-header .icon").click(function() {
+		wSlide.animate({
+			right: '-100%'
+		}, function() {
+			$(this).hide();
+		});
+	});
+
+	$(".js_open_slide").click(function() {
+		wSlide.show();
+		wSlide.animate({
+			right: '0'
+		});
+	})
 
 });

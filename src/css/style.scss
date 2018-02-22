@@ -1,20 +1,86 @@
 @import 'media.scss';
+//响应式表格
+.table-container
+{
+width: 100%;
+overflow-y: auto;
+_overflow: auto;
+margin: 0 0 1em;
+}
+table{border:0; border-collapse:collapse;}
+table td,table th{border:1px solid #999; padding:.5em 1em}
+//添加IOS下滚动条
+.table-container::-webkit-scrollbar
+{
+-webkit-appearance: none;
+width: 14px;
+height: 14px;
+}
+
+.table-container::-webkit-scrollbar-thumb
+{
+border-radius: 8px;
+border: 3px solid #fff;
+background-color: rgba(0, 0, 0, .3);
+}
 .w-container {
     margin: 15px;
 }
 
 .w-map {
     position: absolute;
-    top: 73px;
+    top: 60px;
     left: 0;
     right: 0;
     bottom: 0;
+}
+.w-slide{
+    position: absolute;
+    right: 0;
+    top: 60px;
+    bottom: 0;
+    width: 200px;
+    background-color: #fff;
+    border: 1px solid #95B8E7;
+    border-bottom: 0;
+    .w-slide-header{
+        position: relative;
+        padding: 5px;
+        background-color: #009688;
+        color: #fff;
+        .icon{
+            position: absolute;
+            right: 5px;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url(../img/arr.png);
+            background-repeat: no-repeat;
+            background-position: center right;
+            cursor: pointer;
+        }
+    }
+}
+.js_open_slide{
+    position: absolute;
+    right: 0;
+    top: 100px;
+    padding: 5px;
+    width: 16px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #95B8E7;
+    background-color: #fff;
 }
 
 .layui-layout-admin .layui-footer {
     text-align: right;
 }
-
+.layui-layout-admin{
+    .layui-body{
+        top: 0;    
+    }
+}
 .site-tree-mobile {
     @media screen and (max-width: 750px) {
         display: block!important;

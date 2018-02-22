@@ -12,52 +12,22 @@
 
 			<div class="layui-body">
 				<!-- 内容主体区域 -->
-				<div class="w-container">
-					<form class="layui-form layui-form-pane" action="">
-						<div class="layui-form-item">
-							<div class="layui-inline">
-								<button class="layui-btn layui-btn-danger" type="button">
-									<i class="layui-icon">ဂ</i>
-									刷新
-								</button>
-							</div>
-							<div class="layui-inline">
-								<label class="layui-form-label">数据类型</label>
-								<div class="layui-input-block">
-									<select name="interest" lay-filter="aihao">
-										<option value="">全部</option>
-										<option value="0">温度</option>
-										<option value="1" selected="">湿度</option>
-										<option value="2">风速</option>
-										<option value="3">PM2.5</option>
-										<option value="4">PM10</option>
-									</select>
-								</div>
-							</div>
-							<div class="layui-inline">
-								<label class="layui-form-label">范围</label>
-								<div class="layui-input-block">
-									<input class="layui-input" name="range" placeholder="请输入范围数值" autocomplete="off" type="text">
-								</div>
-							</div>
-							<div class="layui-inline">
-								<label class="layui-form-label">日期</label>
-								<div class="layui-input-block">
-									<input class="layui-input" name="date" placeholder="请选择日期" autocomplete="off" type="text" id="test1">
-								</div>
-							</div>
-							<div class="layui-inline">
-								<button class="layui-btn" lay-submit>
-									<i class="layui-icon">&#xe615;</i>
-									查询
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
 				<div class="w-map">
 					<div id="container" style="height: 100%"></div>
 				</div>
+				<div class="js_open_slide" title="展开">
+					<
+				</div>
+				<div class="w-slide">
+					<div class="w-slide-header">
+						请选择设备
+						<span class="icon" title="收起"></span>
+					</div>
+					<div class="w-slide-content">
+						<div id="jstree_demo" class="demo"></div>
+					</div>
+				</div>
+				
 			</div>
 			<!-- 底部版权 -->
 			@@include('public/footer.html')
@@ -65,19 +35,120 @@
 			<!-- 移动导航 -->
 			@@include('public/mobile-nav.html')
 		</div>
-		
+
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/demo1.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			//JavaScript代码区域
-			layui.use(['form', 'laydate'], function() {
+			layui.use(['form', 'laydate', 'layer'], function() {
 				var form = layui.form,
-					laydate = layui.laydate;
-				
+					laydate = layui.laydate,
+					layer = layui.layer;
+
 				laydate.render({
 					elem: '#test1', //指定元素
 					range: true
 				});
+
+				layer.open({
+					type: 2,
+					title: 'xx超标报警提醒',
+					area: ['700px', '400px'],
+					content: 'iframe/warning.html' //这里content是一个普通的String
+				});
+			});
+
+			$('#jstree_demo').jstree({
+				'plugins': ['checkbox'],
+				'core': {
+					'data': [
+						{
+							'text': '设备',
+							'state': {
+								'opened': true
+							},
+							'children': [{
+									'text': '周口',
+									'children': [{
+											'text': '淮阳',
+											'icon': 'none'
+										},
+										{
+											'text': '扶沟',
+											'icon': 'none'
+										},
+										{
+											'text': '商水',
+											'icon': 'none'
+										}
+									],
+									'state': {
+										'opened': true
+									}
+								},
+								{
+									'text': '焦作',
+									'children': [{
+											'text': 'bootstrap.js',
+											'icon': 'none'
+										},
+										{
+											'text': 'hplus.min.js',
+											'icon': 'none'
+										},
+										{
+											'text': 'jquery.min.js',
+											'icon': 'none'
+										},
+										{
+											'text': 'jsTree.min.js',
+											'icon': 'none'
+										},
+										{
+											'text': 'custom.min.js',
+											'icon': 'none'
+										}
+									],
+									'state': {
+										'opened': true
+									}
+								},
+								{
+									'text': '安阳',
+									'children': [{
+											'text': 'layout.html',
+											'icon': 'none'
+										},
+										{
+											'text': 'navigation.html',
+											'icon': 'none'
+										},
+										{
+											'text': 'navbar.html',
+											'icon': 'none'
+										},
+										{
+											'text': 'footer.html',
+											'icon': 'none'
+										},
+										{
+											'text': 'sidebar.html',
+											'icon': 'none'
+										}
+									],
+									'state': {
+										'opened': true
+									}
+								}
+							]
+						}
+					]
+				}
+			}).on('loaded.jstree', function(e, data) {
+				var inst = data.instance;
+				var obj = inst.get_node(e.target.firstChild.firstChild);
+
+				inst.select_node(obj);
 			});
 		</script>
 	</body>
