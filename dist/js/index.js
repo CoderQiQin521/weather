@@ -3,7 +3,8 @@ layui.use(['jquery', 'element', 'layer'], function() {
 		element = layui.element,
 		layer = layui.layer;
 
-	var wSlide = $(".w-slide");
+	var wSlide = $(".w-slide"),
+		wBottom = $(".w-bottom");
 
 	//	layer.msg('你好5');
 
@@ -17,7 +18,12 @@ layui.use(['jquery', 'element', 'layer'], function() {
 	});
 
 	$("#allOpen").click(function() {
-		layer.confirm('是否全部开启');
+		layer.confirm('是否全部开启?',function(){
+			console.log(1);
+		});
+	});
+	$("#allClose").click(function(){
+		layer.confirm('是否全部禁用?');
 	});
 
 	$(".w-slide-header .icon").click(function() {
@@ -33,6 +39,14 @@ layui.use(['jquery', 'element', 'layer'], function() {
 		wSlide.animate({
 			right: '0'
 		});
-	})
+	});
+	
+	$(".w-bottom .icon").click(function(){
+		wBottom.animate({
+			bottom: '-100%'
+		},function(){
+			$(this).hide();
+		});
+	});
 
 });

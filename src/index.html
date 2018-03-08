@@ -16,53 +16,61 @@
 					<div id="container" style="height: 100%"></div>
 				</div>
 				<div class="js_open_slide" title="展开">
-					<
+					< </div>
+						<div class="w-slide">
+							<div class="w-slide-header">
+								请选择设备
+								<span class="icon" title="收起"></span>
+							</div>
+							<div class="w-slide-content">
+								<div id="jstree_demo" class="demo"></div>
+							</div>
+						</div>
+
+						<div class="w-bottom">
+							<div class="w-bottom-header">
+								实时监控
+								<span class="icon" title="收起"></span>
+							</div>
+							<div class="w-bottom-content" style="height: 100%">
+								<div id="bottom" style="height: 100%"></div>
+							</div>
+						</div>
+
 				</div>
-				<div class="w-slide">
-					<div class="w-slide-header">
-						请选择设备
-						<span class="icon" title="收起"></span>
-					</div>
-					<div class="w-slide-content">
-						<div id="jstree_demo" class="demo"></div>
-					</div>
-				</div>
-				
+				<!-- 底部版权 -->
+				@@include('public/footer.html')
+
+				<!-- 移动导航 -->
+				@@include('public/mobile-nav.html')
 			</div>
-			<!-- 底部版权 -->
-			@@include('public/footer.html')
 
-			<!-- 移动导航 -->
-			@@include('public/mobile-nav.html')
-		</div>
+			<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+			<script src="js/demo1.js" type="text/javascript" charset="utf-8"></script>
+			<script>
+				//JavaScript代码区域
+				layui.use(['form', 'laydate', 'layer'], function() {
+					var form = layui.form,
+						laydate = layui.laydate,
+						layer = layui.layer;
 
-		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/demo1.js" type="text/javascript" charset="utf-8"></script>
-		<script>
-			//JavaScript代码区域
-			layui.use(['form', 'laydate', 'layer'], function() {
-				var form = layui.form,
-					laydate = layui.laydate,
-					layer = layui.layer;
+					laydate.render({
+						elem: '#test1', //指定元素
+						range: true
+					});
 
-				laydate.render({
-					elem: '#test1', //指定元素
-					range: true
+					layer.open({
+						type: 2,
+						title: 'xx超标报警提醒',
+						area: ['700px', '400px'],
+						content: 'iframe/warning.html' //这里content是一个普通的String
+					});
 				});
 
-				layer.open({
-					type: 2,
-					title: 'xx超标报警提醒',
-					area: ['700px', '400px'],
-					content: 'iframe/warning.html' //这里content是一个普通的String
-				});
-			});
-
-			$('#jstree_demo').jstree({
-				'plugins': ['checkbox'],
-				'core': {
-					'data': [
-						{
+				$('#jstree_demo').jstree({
+					'plugins': ['checkbox'],
+					'core': {
+						'data': [{
 							'text': '设备',
 							'state': {
 								'opened': true
@@ -141,16 +149,68 @@
 									}
 								}
 							]
-						}
-					]
-				}
-			}).on('loaded.jstree', function(e, data) {
-				var inst = data.instance;
-				var obj = inst.get_node(e.target.firstChild.firstChild);
+						}]
+					}
+				}).on('loaded.jstree', function(e, data) {
+					var inst = data.instance;
+					var obj = inst.get_node(e.target.firstChild.firstChild);
 
-				inst.select_node(obj);
-			});
-		</script>
+					inst.select_node(obj);
+				});
+
+				var dom = document.getElementById("bottom");
+				var myChart = echarts.init(dom);
+				var app = {};
+				option = null;
+				$.get('js/aqi.json', function(data) {
+					myChart.setOption(option = {
+						tooltip: {
+							trigger: 'axis'
+						},
+						xAxis: {
+							data: data.map(function(item) {
+								return item[0];
+							})
+						},
+						yAxis: {
+							splitLine: {
+								show: false
+							}
+						},
+
+						dataZoom: [{
+							startValue: '2014-06-01'
+						}, {
+							type: 'inside'
+						}],
+
+						series: {
+							name: 'pm2.5',
+							type: 'line',
+							data: data.map(function(item) {
+								return item[1];
+							}),
+							markLine: {
+								silent: true,
+								data: [{
+									yAxis: 50
+								}, {
+									yAxis: 100
+								}, {
+									yAxis: 150
+								}, {
+									yAxis: 200
+								}, {
+									yAxis: 300
+								}]
+							}
+						}
+					});
+				});;
+				if(option && typeof option === "object") {
+					myChart.setOption(option, true);
+				}
+			</script>
 	</body>
 
 </html>

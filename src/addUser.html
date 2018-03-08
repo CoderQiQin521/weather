@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<!-- 头部资源 -->
+	@@include('public/head.html')
+
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<!-- 导航 -->
+			@@include('public/header.html')
+			<!-- 菜单 -->
+			@@include('public/nav.html')
+
+			<div class="layui-body" style="top: 60px;">
+				<!-- 内容主体区域 -->
+				<div class="w-container">
+					<fieldset class="layui-elem-field layui-field-title">
+						<legend>新增帐号</legend>
+					</fieldset>
+					<form class="layui-form resForm" action="">
+						<div class="layui-form-item">
+							<label class="layui-form-label">帐号</label>
+							<div class="layui-input-block">
+								<input type="text" name="title" required lay-verify="required" placeholder="请输入帐号" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">密码</label>
+							<div class="layui-input-block">
+								<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">确认密码</label>
+							<div class="layui-input-block">
+								<input type="password" name="password" required lay-verify="required" placeholder="确认密码" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">姓名</label>
+							<div class="layui-input-block">
+								<input type="text" name="title" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">电话</label>
+							<div class="layui-input-block">
+								<input type="text" name="title" required lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">地址</label>
+							<div class="layui-input-block">
+								<select name="city" lay-verify="required">
+									<option value=""></option>
+									<option value="0">北京</option>
+									<option value="1">上海</option>
+									<option value="2">广州</option>
+									<option value="3">深圳</option>
+									<option value="4">杭州</option>
+								</select>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">是否启用</label>
+							<div class="layui-input-block">
+								<input type="checkbox" checked="" name="switch" lay-skin="switch">
+							</div>
+						</div>
+						
+						
+						<!--<div class="layui-form-item">
+							<label class="layui-form-label">复选框</label>
+							<div class="layui-input-block">
+								<input type="checkbox" name="like[write]" title="写作">
+								<input type="checkbox" name="like[read]" title="阅读" checked>
+								<input type="checkbox" name="like[dai]" title="发呆">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">单选框</label>
+							<div class="layui-input-block">
+								<input type="radio" name="sex" value="男" title="男">
+								<input type="radio" name="sex" value="女" title="女" checked>
+							</div>
+						</div>-->
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button class="layui-btn" lay-submit lay-filter="formDemo">立即添加</button>
+								<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- 底部版权 -->
+			@@include('public/footer.html')
+
+			<!-- 移动导航 -->
+			@@include('public/mobile-nav.html')
+		</div>
+
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use(['form'], function() {
+				var form = layui.form;
+
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					layer.msg(JSON.stringify(data.field));
+					return false;
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

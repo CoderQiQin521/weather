@@ -14,7 +14,7 @@
 				<!-- 内容主体区域 -->
 				<div class="w-container">
 					<fieldset class="layui-elem-field layui-field-title">
-						<legend>已审核</legend>
+						<legend>用户列表</legend>
 					</fieldset>
 					<form class="layui-form layui-form-pane" action="">
 						<div class="layui-form-item">
@@ -29,7 +29,7 @@
 										</button>
 							</div>
 							<div class="layui-inline">
-								<label class="layui-form-label">关键字</label>
+								<label class="layui-form-label">关键词</label>
 								<div class="layui-input-block">
 									<input type="text" class="layui-input" placeholder="请输入id或姓名" name="keywords" autocomplete="off" />
 								</div>
@@ -42,7 +42,37 @@
 							</div>
 						</div>
 					</form>
-					<table id="accounts" lay-filter="test"></table>
+					<form class="layui-form" action="">
+					<table class="layui-table">
+						<colgroup>
+							<col width="50">
+							<col width="150">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>用户名</th>
+								<th>姓名</th>
+								<th>电话</th>
+								<th>注册日期</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							<tr>
+								<td>asdas454646</td>
+								<td>老王</td>
+								<td>1383838438</td>
+								<td>2018-02-03</td>
+								<td><input type="checkbox" name="switch" lay-skin="switch"></td>
+								<td><a class="layui-btn layui-bg-blue layui-btn-xs" lay-event="edit">权限</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a></td>
+							</tr>
+							
+						</tbody>
+					</table>
+					</form>
 				</div>
 			</div>
 			<!-- 底部版权 -->
@@ -52,57 +82,12 @@
 			@@include('public/mobile-nav.html')
 		</div>
 
-		<script type="text/html" id="switchTpl">
-			<!-- 这里的 checked 的状态只是演示 -->
-			<input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="开|关" lay-filter="sexDemo">
-		</script>
-
-		<script type="text/html" id="barDemo">
-			<a class="layui-btn layui-btn-xs" lay-event="edit">权限</a>
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-		</script>
-
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			//JavaScript代码区域
-			layui.use(['form', 'table'], function() {
-				var form = layui.form,
-					table = layui.table;
+			layui.use(['form'], function() {
+				var form = layui.form;
 
-				table.render({
-					elem: '#accounts',
-					height: 450,
-					url: './user.json',
-					page: true,
-					cellMinWidth: 80,
-					cols: [
-						[{
-								field: 'id',
-								title: '用户名',
-								sort: true,
-								fixed: 'left'
-							}, {
-								field: 'name',
-								title: '姓名'
-							}, {
-								field: 'datereg',
-								title: '注册日期',
-								sort: true
-							},
-							{
-								field: 'switch',
-								title: '启用',
-								templet: '#switchTpl',
-								unresize: true
-							},
-							{
-								field: 'operation',
-								title: '操作',
-								templet: '#barDemo'
-							}
-						]
-					]
-				});
 			});
 		</script>
 	</body>

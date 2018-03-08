@@ -1,6 +1,7 @@
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
+var wBottom = $(".w-bottom");
 option = null;
 var data = [{
 		name: '海门',
@@ -1140,7 +1141,14 @@ option = {
 			zlevel: 1
 		}
 	]
-};;
+};
 if(option && typeof option === "object") {
 	myChart.setOption(option, true);
 }
+
+myChart.on('click',function(){
+	wBottom.show();
+	wBottom.animate({
+		bottom: '0'
+	});
+});
