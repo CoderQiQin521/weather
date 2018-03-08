@@ -177,36 +177,39 @@
 						</div>
 					</form>
 					<form class="layui-form" action="">
-					<table class="layui-table">
-						<colgroup>
-							<col width="50">
-							<col width="150">
-						</colgroup>
-						<thead>
-							<tr>
-								<th>用户名</th>
-								<th>姓名</th>
-								<th>电话</th>
-								<th>注册日期</th>
-								<th>状态</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							
-							<tr>
-								<td>asdas454646</td>
-								<td>老王</td>
-								<td>1383838438</td>
-								<td>2018-02-03</td>
-								<td><input type="checkbox" name="switch" lay-skin="switch"></td>
-								<td><a class="layui-btn layui-bg-blue layui-btn-xs" lay-event="edit">权限</a>
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a></td>
-							</tr>
-							
-						</tbody>
-					</table>
+						<table class="layui-table">
+							<colgroup>
+								<col width="50">
+								<col width="150">
+							</colgroup>
+							<thead>
+								<tr>
+									<th>用户名</th>
+									<th>姓名</th>
+									<th>电话</th>
+									<th>注册日期</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr>
+									<td>asdas454646</td>
+									<td>老王</td>
+									<td>1383838438</td>
+									<td>2018-02-03</td>
+									<td><input type="checkbox" name="switch" lay-skin="switch"></td>
+									<td>
+										<a class="layui-btn layui-bg-blue layui-btn-xs" lay-event="edit">权限</a>
+										<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
 					</form>
+					<div id="test1"></div>
 				</div>
 			</div>
 			<!-- 底部版权 -->
@@ -225,9 +228,15 @@
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			//JavaScript代码区域
-			layui.use(['form'], function() {
-				var form = layui.form;
-
+			layui.use(['form', 'laypage'], function() {
+				var form = layui.form,
+					laypage = layui.laypage;
+				//执行一个laypage实例
+				laypage.render({
+					elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+						,
+					count: 50 //数据总数，从服务端得到
+				});
 			});
 		</script>
 	</body>
