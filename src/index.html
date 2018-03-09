@@ -19,12 +19,32 @@
 					< </div>
 						<div class="w-slide">
 							<div class="w-slide-header">
-								请选择设备
+								请选择数据类型
 								<span class="icon" title="收起"></span>
+							</div>
+							<form class="layui-form" action="">
+							<div class="layui-form-item" style="margin-bottom: 0;">
+								<label class="layui-form-label" style="text-align: center;">数据类型</label>
+								<div class="layui-input-block">
+									<select name="dataType" lay-verify="required">
+										<option value=""></option>
+										<option value="0">PM2.5</option>
+										<option value="1">风速</option>
+										<option value="2">温度</option>
+										<option value="3">湿度</option>
+										<option value="4">...</option>
+									</select>
+								</div>
+							</div>
+							</form>
+							<div class="w-slide-header">
+								请选择设备
+								<!--<span class="icon" title="收起"></span>-->
 							</div>
 							<div class="w-slide-content">
 								<div id="jstree_demo" class="demo"></div>
 							</div>
+
 						</div>
 
 						<div class="w-bottom">
