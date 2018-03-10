@@ -87,7 +87,7 @@
 				<a href="table.html">历史数据</a>
 			</li>
 			<li class="layui-nav-item">
-				<a href="area-simple.html">污染地图</a>
+				<a href="scatter-map.html">污染地图</a>
 			</li>
 			<hr />
 			<li class="layui-nav-item">
@@ -157,19 +157,19 @@
 								<span class="icon" title="收起"></span>
 							</div>
 							<form class="layui-form" action="">
-							<div class="layui-form-item" style="margin-bottom: 0;">
-								<label class="layui-form-label" style="text-align: center;">数据类型</label>
-								<div class="layui-input-block">
-									<select name="dataType" lay-verify="required">
-										<option value=""></option>
-										<option value="0">PM2.5</option>
-										<option value="1">风速</option>
-										<option value="2">温度</option>
-										<option value="3">湿度</option>
-										<option value="4">...</option>
-									</select>
+								<div class="layui-form-item" style="margin-bottom: 0;">
+									<label class="layui-form-label" style="text-align: center;">数据类型</label>
+									<div class="layui-input-block">
+										<select name="dataType" lay-verify="required">
+											<option value=""></option>
+											<option value="0">PM2.5</option>
+											<option value="1">风速</option>
+											<option value="2">温度</option>
+											<option value="3">湿度</option>
+											<option value="4">...</option>
+										</select>
+									</div>
 								</div>
-							</div>
 							</form>
 							<div class="w-slide-header">
 								请选择设备
@@ -204,173 +204,173 @@
 </div>
 <div class="site-mobile-shade"></div>
 			</div>
+		</div>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/demo1.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use(['form', 'laydate', 'layer'], function() {
+				var form = layui.form,
+					laydate = layui.laydate,
+					layer = layui.layer;
 
-			<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-			<script src="js/demo1.js" type="text/javascript" charset="utf-8"></script>
-			<script>
-				//JavaScript代码区域
-				layui.use(['form', 'laydate', 'layer'], function() {
-					var form = layui.form,
-						laydate = layui.laydate,
-						layer = layui.layer;
-
-					laydate.render({
-						elem: '#test1', //指定元素
-						range: true
-					});
-
-					layer.open({
-						type: 2,
-						title: 'xx超标报警提醒',
-						area: ['700px', '400px'],
-						content: 'iframe/warning.html' //这里content是一个普通的String
-					});
+				laydate.render({
+					elem: '#test1', //指定元素
+					range: true
 				});
 
-				$('#jstree_demo').jstree({
-					'plugins': ['checkbox'],
-					'core': {
-						'data': [{
-							'text': '设备',
-							'state': {
-								'opened': true
-							},
-							'children': [{
-									'text': '周口',
-									'children': [{
-											'text': '淮阳',
-											'icon': 'none'
-										},
-										{
-											'text': '扶沟',
-											'icon': 'none'
-										},
-										{
-											'text': '商水',
-											'icon': 'none'
-										}
-									],
-									'state': {
-										'opened': true
+				layer.open({
+					type: 2,
+					title: 'xx超标报警提醒',
+					area: ['700px', '400px'],
+					content: 'iframe/warning.html' //这里content是一个普通的String
+				});
+			});
+
+			$('#jstree_demo').jstree({
+				'plugins': ['checkbox'],
+				'core': {
+					'data': [{
+						'text': '设备',
+						'state': {
+							'opened': true
+						},
+						'children': [{
+								'text': '周口',
+								'children': [{
+										'text': '淮阳',
+										'icon': 'none'
+									},
+									{
+										'text': '扶沟',
+										'icon': 'none'
+									},
+									{
+										'text': '商水',
+										'icon': 'none'
 									}
-								},
-								{
-									'text': '焦作',
-									'children': [{
-											'text': 'bootstrap.js',
-											'icon': 'none'
-										},
-										{
-											'text': 'hplus.min.js',
-											'icon': 'none'
-										},
-										{
-											'text': 'jquery.min.js',
-											'icon': 'none'
-										},
-										{
-											'text': 'jsTree.min.js',
-											'icon': 'none'
-										},
-										{
-											'text': 'custom.min.js',
-											'icon': 'none'
-										}
-									],
-									'state': {
-										'opened': true
-									}
-								},
-								{
-									'text': '安阳',
-									'children': [{
-											'text': 'layout.html',
-											'icon': 'none'
-										},
-										{
-											'text': 'navigation.html',
-											'icon': 'none'
-										},
-										{
-											'text': 'navbar.html',
-											'icon': 'none'
-										},
-										{
-											'text': 'footer.html',
-											'icon': 'none'
-										},
-										{
-											'text': 'sidebar.html',
-											'icon': 'none'
-										}
-									],
-									'state': {
-										'opened': true
-									}
+								],
+								'state': {
+									'opened': true
 								}
-							]
-						}]
-					}
-				}).on('loaded.jstree', function(e, data) {
-					var inst = data.instance;
-					var obj = inst.get_node(e.target.firstChild.firstChild);
-
-					inst.select_node(obj);
-				});
-
-				var dom = document.getElementById("bottom");
-				var myChart = echarts.init(dom);
-				var app = {};
-				option = null;
-				$.get('js/aqi.json', function(data) {
-					myChart.setOption(option = {
-						tooltip: {
-							trigger: 'axis'
-						},
-						xAxis: {
-							data: data.map(function(item) {
-								return item[0];
-							})
-						},
-						yAxis: {
-							splitLine: {
-								show: false
+							},
+							{
+								'text': '焦作',
+								'children': [{
+										'text': 'bootstrap.js',
+										'icon': 'none'
+									},
+									{
+										'text': 'hplus.min.js',
+										'icon': 'none'
+									},
+									{
+										'text': 'jquery.min.js',
+										'icon': 'none'
+									},
+									{
+										'text': 'jsTree.min.js',
+										'icon': 'none'
+									},
+									{
+										'text': 'custom.min.js',
+										'icon': 'none'
+									}
+								],
+								'state': {
+									'opened': true
+								}
+							},
+							{
+								'text': '安阳',
+								'children': [{
+										'text': 'layout.html',
+										'icon': 'none'
+									},
+									{
+										'text': 'navigation.html',
+										'icon': 'none'
+									},
+									{
+										'text': 'navbar.html',
+										'icon': 'none'
+									},
+									{
+										'text': 'footer.html',
+										'icon': 'none'
+									},
+									{
+										'text': 'sidebar.html',
+										'icon': 'none'
+									}
+								],
+								'state': {
+									'opened': true
+								}
 							}
-						},
-
-						dataZoom: [{
-							startValue: '2014-06-01'
-						}, {
-							type: 'inside'
-						}],
-
-						series: {
-							name: 'pm2.5',
-							type: 'line',
-							data: data.map(function(item) {
-								return item[1];
-							}),
-							markLine: {
-								silent: true,
-								data: [{
-									yAxis: 50
-								}, {
-									yAxis: 100
-								}, {
-									yAxis: 150
-								}, {
-									yAxis: 200
-								}, {
-									yAxis: 300
-								}]
-							}
-						}
-					});
-				});;
-				if(option && typeof option === "object") {
-					myChart.setOption(option, true);
+						]
+					}]
 				}
-			</script>
+			}).on('loaded.jstree', function(e, data) {
+				var inst = data.instance;
+				var obj = inst.get_node(e.target.firstChild.firstChild);
+
+				inst.select_node(obj);
+			});
+
+			var dom = document.getElementById("bottom");
+			var myChart = echarts.init(dom);
+			var app = {};
+			option = null;
+			$.get('js/aqi.json', function(data) {
+				myChart.setOption(option = {
+					tooltip: {
+						trigger: 'axis'
+					},
+					xAxis: {
+						data: data.map(function(item) {
+							return item[0];
+						})
+					},
+					yAxis: {
+						splitLine: {
+							show: false
+						}
+					},
+
+					dataZoom: [{
+						startValue: '2014-06-01'
+					}, {
+						type: 'inside'
+					}],
+
+					series: {
+						name: 'pm2.5',
+						type: 'line',
+						data: data.map(function(item) {
+							return item[1];
+						}),
+						markLine: {
+							silent: true,
+							data: [{
+								yAxis: 50
+							}, {
+								yAxis: 100
+							}, {
+								yAxis: 150
+							}, {
+								yAxis: 200
+							}, {
+								yAxis: 300
+							}]
+						}
+					}
+				});
+			});;
+			if(option && typeof option === "object") {
+				myChart.setOption(option, true);
+			}
+		</script>
 	</body>
 
 </html>
