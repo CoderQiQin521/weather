@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<!-- 头部资源 -->
+	@@include('public/head.html')
+
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<!-- 导航 -->
+			@@include('public/header.html')
+			<!-- 菜单 -->
+			@@include('public/nav.html')
+
+			<div class="layui-body" style="top: 60px;">
+				<!-- 内容主体区域 -->
+				<div class="w-container layui-hide-xs">
+
+					<form class="layui-form layui-form-pane" action="">
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<button class="layui-btn layui-btn-danger" type="button">
+									<i class="layui-icon">ဂ</i>
+									刷新
+								</button>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">数据类型</label>
+								<div class="layui-input-block">
+									<select name="interest" lay-filter="aihao">
+										<option value="">全部</option>
+										<option value="0">温度</option>
+										<option value="1" selected="">湿度</option>
+										<option value="2">风速</option>
+										<option value="3">PM2.5</option>
+										<option value="4">PM10</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">范围</label>
+								<div class="layui-input-block">
+									<input class="layui-input" name="range" placeholder="请输入范围数值" autocomplete="off" type="text">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">日期</label>
+								<div class="layui-input-block">
+									<input class="layui-input" name="date" placeholder="请选择日期" autocomplete="off" type="text" id="test1">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<button class="layui-btn" lay-submit>
+									<i class="layui-icon">&#xe615;</i>
+									查询
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="w-map" style="top:60px;">
+					<div id="container" style="height: 100%"></div>
+				</div>
+			</div>
+			<!-- 底部版权 -->
+			@@include('public/footer.html')
+
+			<!-- 移动导航 -->
+			@@include('public/mobile-nav.html')
+		</div>
+
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bar.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use(['form', 'laydate'], function() {
+				var form = layui.form,
+					laydate = layui.laydate;
+
+				laydate.render({
+					elem: '#test1', //指定元素
+					range: true
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			var dom = document.getElementById("container");
+			var myChart = echarts.init(dom);
+			var app = {};
+			option = null;
+			var dataAxis = ['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
+			var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+			var yMax = 500;
+			var dataShadow = [];
+
+			for(var i = 0; i < data.length; i++) {
+				dataShadow.push(yMax);
+			}
+
+			option = {
+				title: {
+					text: '特性示例：渐变色 阴影 点击缩放',
+					subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
+				},
+				xAxis: {
+					data: dataAxis,
+					axisLabel: {
+						inside: true,
+						textStyle: {
+							color: '#fff'
+						}
+					},
+					axisTick: {
+						show: false
+					},
+					axisLine: {
+						show: false
+					},
+					z: 10
+				},
+				yAxis: {
+					axisLine: {
+						show: false
+					},
+					axisTick: {
+						show: false
+					},
+					axisLabel: {
+						textStyle: {
+							color: '#999'
+						}
+					}
+				},
+				dataZoom: [{
+					type: 'inside'
+				}],
+				series: [{ // For shadow
+						type: 'bar',
+						itemStyle: {
+							normal: {
+								color: 'rgba(0,0,0,0.05)'
+							}
+						},
+						barGap: '-100%',
+						barCategoryGap: '40%',
+						data: dataShadow,
+						animation: false
+					},
+					{
+						type: 'bar',
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#83bff6'
+										},
+										{
+											offset: 0.5,
+											color: '#188df0'
+										},
+										{
+											offset: 1,
+											color: '#188df0'
+										}
+									]
+								)
+							},
+							emphasis: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#2378f7'
+										},
+										{
+											offset: 0.7,
+											color: '#2378f7'
+										},
+										{
+											offset: 1,
+											color: '#83bff6'
+										}
+									]
+								)
+							}
+						},
+						data: data
+					}
+				]
+			};
+
+			// Enable data zoom when user click bar.
+			var zoomSize = 6;
+			myChart.on('click', function(params) {
+				console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+				myChart.dispatchAction({
+					type: 'dataZoom',
+					startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+					endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+				});
+			});;
+			if(option && typeof option === "object") {
+				myChart.setOption(option, true);
+			}
+		</script>
+	</body>
+
+</html>
