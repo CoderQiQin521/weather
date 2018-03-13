@@ -3,20 +3,183 @@
 
 	<head>
 		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+		<!--<link rel="stylesheet" type="text/css" href="layui/css/layui.mobile.css"/>-->
+		<link rel="stylesheet" type="text/css" href="css/global.css" />
+		<link rel="stylesheet" type="text/css" href="css/jstreestyle.min.css" />
+		<link rel="stylesheet" href="css/style.min.css" />
+		<script src="layui/layui.js"></script>
 	</head>
 
-	<body style="height: 100%; margin: 0">
-		<div id="container" style="height: 100%"></div>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<!-- 导航 -->
+			@@include('public/header.html')
+			<!-- 菜单 -->
+			@@include('public/nav.html')
+
+			<div class="layui-body">
+				<!-- 内容主体区域 -->
+				<div class="w-map">
+				</div>
+				<div class="js_open_slide" title="展开">
+					< </div>
+						<div class="w-slide">
+							<div class="w-slide-header">
+								请选择数据类型
+								<span class="icon" title="收起"></span>
+							</div>
+							<form class="layui-form" action="">
+								<div class="layui-form-item" style="margin-bottom: 0;">
+									<label class="layui-form-label" style="text-align: center;">数据类型</label>
+									<div class="layui-input-block">
+										<select name="dataType" lay-verify="required">
+											<option value=""></option>
+											<option value="0">PM2.5</option>
+											<option value="1">风速</option>
+											<option value="2">温度</option>
+											<option value="3">湿度</option>
+											<option value="4">...</option>
+										</select>
+									</div>
+								</div>
+							</form>
+							<div class="w-slide-header">
+								请选择设备
+								<!--<span class="icon" title="收起"></span>-->
+							</div>
+							<div class="w-slide-content">
+								<div id="jstree_demo" class="demo"></div>
+							</div>
+
+						</div>
+
+						<div class="w-bottom">
+							<div class="w-bottom-header">
+								实时监控
+								<span class="icon" title="收起"></span>
+							</div>
+							<div class="w-bottom-content" style="height: 100%">
+								<div id="bottom" style="height: 100%"></div>
+							</div>
+						</div>
+
+				</div>
+				<!-- 底部版权 -->
+				@@include('public/footer.html')
+
+				<!-- 移动导航 -->
+				@@include('public/mobile-nav.html')
+			</div>
+		</div>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use(['form', 'laydate', 'layer', 'jquery'], function() {
+				var form = layui.form,
+					laydate = layui.laydate,
+					layer = layui.layer,
+					$ = layui.jquery;
+
+				laydate.render({
+					elem: '#test1', //指定元素
+					range: true
+				});
+			});
+
+			//			$('#jstree_demo').jstree({
+			//				'plugins': ['checkbox'],
+			//				'core': {
+			//					'data': [{
+			//						'text': '设备',
+			//						'state': {
+			//							'opened': true
+			//						},
+			//						'children': [{
+			//								'text': '周口',
+			//								'children': [{
+			//										'text': '淮阳',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': '扶沟',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': '商水',
+			//										'icon': 'none'
+			//									}
+			//								],
+			//								'state': {
+			//									'opened': true
+			//								}
+			//							},
+			//							{
+			//								'text': '焦作',
+			//								'children': [{
+			//										'text': 'bootstrap.js',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': 'hplus.min.js',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': 'jquery.min.js',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': 'jsTree.min.js',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': 'custom.min.js',
+			//										'icon': 'none'
+			//									}
+			//								],
+			//								'state': {
+			//									'opened': true
+			//								}
+			//							},
+			//							{
+			//								'text': '安阳',
+			//								'children': [{
+			//										'text': 'layout.html',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': 'navigation.html',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': 'navbar.html',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': 'footer.html',
+			//										'icon': 'none'
+			//									},
+			//									{
+			//										'text': 'sidebar.html',
+			//										'icon': 'none'
+			//									}
+			//								],
+			//								'state': {
+			//									'opened': true
+			//								}
+			//							}
+			//						]
+			//					}]
+			//				}
+			//			}).on('loaded.jstree', function(e, data) {
+			//				var inst = data.instance;
+			//				var obj = inst.get_node(e.target.firstChild.firstChild);
+			//
+			//				inst.select_node(obj);
+			//			});
+
+			
+		</script>
 		<script type="text/javascript">
 			$(function() {
 
@@ -26,7 +189,7 @@
 				option = null;
 				app.title = '热力图与百度地图扩展';
 
-				$.get('js/tracks.json', function(data) {
+				$.get('js/data.json', function(data) {
 
 					var points = [].concat.apply([], data.map(function(track) {
 						return track.map(function(seg) {
